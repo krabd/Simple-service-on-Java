@@ -1,13 +1,11 @@
 package com.krab.rest.controller;
 
+import com.krab.rest.ResourceNotFoundException;
 import com.krab.rest.domain.Record;
 import com.krab.rest.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +23,16 @@ public class TestRestController {
     @PostMapping("/addRecord")
     public ResponseEntity<Record> addRecord(@RequestParam String description) {
         Record record = new Record(description);
-        recordRepository.save(record);
-        return ResponseEntity.ok(record);
+        final Record updatedRecord = recordRepository.save(record);
+        return ResponseEntity.ok(updatedRecord);
+    }
+
+    @PutMapping("/updateRecord")
+    public ResponseEntity<Record> updateRecord(@RequestParam Long id, @RequestBody String description) throws ResourceNotFoundException {
+        Record record = recordRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Record not found for this id :: " + id));
+        record.setDescription(description);
+        final Record updatedRecord = recordRepository.save(record);
+        return ResponseEntity.ok(updatedRecord);
     }
 
     @PostMapping("/filterRecords")
