@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface RecordRepository extends CrudRepository<Record, Long> {
 
-    List<Record> findByDescriptionLike(String description);
+    List<Record> findByDescriptionContaining(String description);
 
 }

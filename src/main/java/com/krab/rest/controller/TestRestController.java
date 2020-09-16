@@ -3,6 +3,7 @@ package com.krab.rest.controller;
 import com.krab.rest.domain.Record;
 import com.krab.rest.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,15 +23,15 @@ public class TestRestController {
     }
 
     @PostMapping("/addRecord")
-    public String addRecord(@RequestParam String description) {
+    public ResponseEntity<Record> addRecord(@RequestParam String description) {
         Record record = new Record(description);
         recordRepository.save(record);
-        return "Ok";
+        return ResponseEntity.ok(record);
     }
 
     @PostMapping("/filterRecords")
-    public List<Record> filter(@RequestParam String description) {
-        List<Record> records = recordRepository.findByDescriptionLike(description);
-        return records;
+    public ResponseEntity<List<Record>> filter(@RequestParam String description) {
+        List<Record> records = recordRepository.findByDescriptionContaining(description);
+        return ResponseEntity.ok(records);
     }
 }
