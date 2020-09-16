@@ -1,18 +1,18 @@
 package com.krab.rest.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Record {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private String description;
+
+    @ManyToOne
+    private Author author;
 
     public Record() {
     }
@@ -36,4 +36,13 @@ public class Record {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
 }
