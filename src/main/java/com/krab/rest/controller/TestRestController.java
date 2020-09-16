@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TestRestController {
 
@@ -24,5 +26,11 @@ public class TestRestController {
         Record record = new Record(description);
         recordRepository.save(record);
         return "Ok";
+    }
+
+    @PostMapping("/filterRecords")
+    public List<Record> filter(@RequestParam String description) {
+        List<Record> records = recordRepository.findByDescriptionLike(description);
+        return records;
     }
 }
