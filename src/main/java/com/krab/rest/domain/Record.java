@@ -14,6 +14,13 @@ public class Record {
 
     private String description;
 
+    public Record() {
+    }
+
+    public Record(String description) {
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }
