@@ -17,7 +17,7 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     Set<Record> records;
 
     public Author() {
