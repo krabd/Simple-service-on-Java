@@ -1,17 +1,19 @@
 package com.krab.rest.services;
 
-import com.krab.rest.domain.Author;
+import com.krab.rest.dto.AuthorDto;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface AuthorsService {
 
-    Author addAuthor(String firstName, String lastName);
+    AuthorDto addAuthor(String firstName, String lastName);
 
-    Author updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException;
+    AuthorDto updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException;
 
-    Iterable<Author> getAuthors();
+    List<AuthorDto> getAuthors();
 
     void deleteAuthor(long id);
 }

@@ -1,7 +1,7 @@
 package com.krab.rest.services;
 
-import com.krab.rest.domain.Author;
-import com.krab.rest.domain.Record;
+import com.krab.rest.entity.Author;
+import com.krab.rest.entity.Record;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import com.krab.rest.repositories.AuthorRepository;
 import com.krab.rest.repositories.RecordRepository;

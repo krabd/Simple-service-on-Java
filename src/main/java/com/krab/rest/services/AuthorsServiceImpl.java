@@ -1,40 +1,51 @@
 package com.krab.rest.services;
 
-import com.krab.rest.domain.Author;
+import com.google.common.collect.Lists;
+import com.krab.rest.dto.AuthorDto;
+import com.krab.rest.entity.Author;
 import com.krab.rest.exceptions.ResourceNotFoundException;
+import com.krab.rest.mapper.AuthorMapper;
 import com.krab.rest.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class AuthorsServiceImpl implements AuthorsService {
 
     private AuthorRepository authorRepository;
+    private AuthorMapper authorMapper;
 
     @Autowired
-    public AuthorsServiceImpl(AuthorRepository authorRepository) {
+    public AuthorsServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
+        this.authorMapper = authorMapper;
     }
 
     @Override
-    public Author addAuthor(String firstName, String lastName) {
+    public AuthorDto addAuthor(String firstName, String lastName) {
         Author author = new Author(firstName, lastName);
         final Author addedAuthor = authorRepository.save(author);
-        return addedAuthor;
+        return authorMapper.toDto(addedAuthor);
     }
 
     @Override
-    public Author updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException {
+    public AuthorDto updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException {
         Author updatingAuthor = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + id));
         updatingAuthor.setFirstName(firstName);
         updatingAuthor.setLastName(lastName);
         final Author updatedAuthor = authorRepository.save(updatingAuthor);
-        return updatedAuthor;
+        return authorMapper.toDto(updatedAuthor);
     }
 
     @Override
-    public Iterable<Author> getAuthors() {
-        return authorRepository.findAll();
+    public List<AuthorDto> getAuthors() {
+        return Lists.newArrayList(authorRepository.findAll())
+                .stream()
+                .map(authorMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override

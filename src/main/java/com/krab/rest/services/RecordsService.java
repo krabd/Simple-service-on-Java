@@ -1,6 +1,6 @@
 package com.krab.rest.services;
 
-import com.krab.rest.domain.Record;
+import com.krab.rest.entity.Record;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
