@@ -7,16 +7,16 @@ import com.krab.rest.exceptions.ResourceNotFoundException;
 import com.krab.rest.mapper.AuthorMapper;
 import com.krab.rest.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class AuthorsServiceImpl implements AuthorsService {
 
-    private AuthorRepository authorRepository;
-    private AuthorMapper authorMapper;
+    private final AuthorRepository authorRepository;
+    private final AuthorMapper authorMapper;
 
     @Autowired
     public AuthorsServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper) {
