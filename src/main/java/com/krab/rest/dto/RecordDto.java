@@ -6,6 +6,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RecordDto extends AbstractDto {
 
     private String description;
