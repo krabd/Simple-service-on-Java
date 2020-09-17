@@ -36,8 +36,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/deleteAuthor/{id}")
-    public ResponseEntity deleteAuthor(@PathVariable long id) throws ResourceNotFoundException {
-        //Author deletingAuthor = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + id));
+    public ResponseEntity deleteAuthor(@PathVariable long id) {
         authorRepository.deleteById(id);
         return ResponseEntity.ok(true);
     }
