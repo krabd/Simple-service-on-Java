@@ -1,5 +1,7 @@
 package com.krab.rest.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Record {
     private String description;
 
     @ManyToOne
+    @NonNull
     private Author author;
 
     public Record() {

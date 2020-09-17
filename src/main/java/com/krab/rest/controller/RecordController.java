@@ -44,9 +44,9 @@ public class RecordController {
         return ResponseEntity.ok(updatedRecord);
     }
 
-    @PostMapping("/filterRecords")
-    public ResponseEntity<List<Record>> filter(@RequestParam String description) {
-        List<Record> records = recordRepository.findByDescriptionContaining(description);
+    @PostMapping("/getRecordsByAuthor")
+    public ResponseEntity<List<Record>> filter(@RequestBody Author author) {
+        List<Record> records = recordRepository.findByAuthor(author);
         return ResponseEntity.ok(records);
     }
 }
