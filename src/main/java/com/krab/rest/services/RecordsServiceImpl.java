@@ -8,12 +8,12 @@ import com.krab.rest.mapper.RecordMapper;
 import com.krab.rest.repositories.AuthorRepository;
 import com.krab.rest.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class RecordsServiceImpl implements RecordsService {
 
     private final RecordRepository recordRepository;
