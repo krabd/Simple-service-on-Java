@@ -1,9 +1,6 @@
 package com.krab.rest.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

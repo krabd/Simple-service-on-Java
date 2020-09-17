@@ -1,6 +1,5 @@
 package com.krab.rest.controller;
 
-import com.krab.rest.entity.Author;
 import com.krab.rest.dto.AuthorDto;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import com.krab.rest.services.AuthorsService;
@@ -27,7 +26,7 @@ public class AuthorController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<AuthorDto> updateAuthor(@RequestBody Author author, @PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<AuthorDto> updateAuthor(@RequestBody AuthorDto author, @PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(authorsService.updateAuthor(id, author.getFirstName(), author.getLastName()));
     }
 
