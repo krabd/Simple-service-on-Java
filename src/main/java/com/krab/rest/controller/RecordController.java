@@ -1,6 +1,6 @@
 package com.krab.rest.controller;
 
-import com.krab.rest.entity.Record;
+import com.krab.rest.dto.RecordDto;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import com.krab.rest.services.RecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +21,22 @@ public class RecordController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Record> addRecord(@RequestParam String description, @RequestParam long authorId) throws ResourceNotFoundException {
+    public ResponseEntity<RecordDto> addRecord(@RequestParam String description, @RequestParam long authorId) throws ResourceNotFoundException {
         return ResponseEntity.ok(recordsService.addRecord(authorId, description));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Record> updateRecord(@RequestBody Record record, @PathVariable long id, @RequestParam long authorId) throws ResourceNotFoundException {
-        return ResponseEntity.ok(recordsService.updateRecord(id, authorId, record.getDescription()));
+    public ResponseEntity<RecordDto> updateRecord(@PathVariable long id, @RequestBody RecordDto record) throws ResourceNotFoundException {
+        return ResponseEntity.ok(recordsService.updateRecord(id, record.getAuthorId(), record.getDescription()));
     }
 
     @GetMapping("/getByAuthorId")
-    public ResponseEntity<List<Record>> getRecordsByAuthorId(@RequestParam long authorId) {
+    public ResponseEntity<List<RecordDto>> getRecordsByAuthorId(@RequestParam long authorId) {
         return ResponseEntity.ok(recordsService.getRecordsByAuthorId(authorId));
     }
 
     @GetMapping("/getByAuthorFirstName")
-    public ResponseEntity<List<Record>> getRecordsByAuthorFirstName(@RequestParam String authorFirstName) {
+    public ResponseEntity<List<RecordDto>> getRecordsByAuthorFirstName(@RequestParam String authorFirstName) {
         return ResponseEntity.ok(recordsService.getRecordsByAuthorFirstName(authorFirstName));
     }
 }

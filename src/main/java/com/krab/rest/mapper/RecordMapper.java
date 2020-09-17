@@ -5,10 +5,12 @@ import com.krab.rest.entity.Record;
 import com.krab.rest.repositories.AuthorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Objects;
 
+@Component
 public class RecordMapper extends AbstractMapper<Record, RecordDto> {
 
     private final ModelMapper mapper;
