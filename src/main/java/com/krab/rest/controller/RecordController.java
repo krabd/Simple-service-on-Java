@@ -14,11 +14,14 @@ import java.util.List;
 @RestController
 public class RecordController {
 
-    @Autowired
     private RecordRepository recordRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
-    private AuthorRepository authorRepository;
+    public RecordController(RecordRepository recordRepository, AuthorRepository authorRepository) {
+        this.recordRepository = recordRepository;
+        this.authorRepository = authorRepository;
+    }
 
     @GetMapping("/getRecordsCount")
     public long getRecordsCount() {
