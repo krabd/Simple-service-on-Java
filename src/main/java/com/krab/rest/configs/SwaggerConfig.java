@@ -29,7 +29,6 @@ public class SwaggerConfig {
         return new ApiInfoBuilder().title("Test Rest Java API")
                 .description("Test Rest Java API reference for developers")
                 .termsOfServiceUrl("http://testrestjava.com")
-                .contact("krab@krab.com")
                 .license("krab License")
                 .licenseUrl("krab@krab.com")
                 .version("1.0")
