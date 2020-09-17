@@ -49,4 +49,10 @@ public class RecordController {
         List<Record> records = recordRepository.findByAuthorId(authorId);
         return ResponseEntity.ok(records);
     }
+
+    @GetMapping("/getRecordsByAuthorFirstName")
+    public ResponseEntity<List<Record>> getByAuthorFirstName(@RequestParam String authorFirstName) {
+        List<Record> records = recordRepository.getByAuthorFirstName(authorFirstName);
+        return ResponseEntity.ok(records);
+    }
 }
