@@ -13,14 +13,14 @@ public class AuthorController {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @PostMapping("/addAuthor")
+    @PostMapping("/api/addAuthor")
     public ResponseEntity<Author> addAuthor(@RequestParam String firstName, @RequestParam String lastName) {
         Author author = new Author(firstName, lastName);
         final Author addedAuthor = authorRepository.save(author);
         return ResponseEntity.ok(addedAuthor);
     }
 
-    @PutMapping("/updateAuthor/{id}")
+    @PutMapping("/api/updateAuthor/{id}")
     public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable long id) throws ResourceNotFoundException {
         Author updatingAuthor = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + id));
         updatingAuthor.setFirstName(author.getFirstName());
@@ -29,13 +29,13 @@ public class AuthorController {
         return ResponseEntity.ok(updatedAuthor);
     }
 
-    @GetMapping("/getAuthors")
+    @GetMapping("/api/getAuthors")
     public ResponseEntity<Iterable<Author>> getAuthors() {
         Iterable<Author> authors = authorRepository.findAll();
         return ResponseEntity.ok(authors);
     }
 
-    @DeleteMapping("/deleteAuthor/{id}")
+    @DeleteMapping("/api/deleteAuthor/{id}")
     public ResponseEntity deleteAuthor(@PathVariable long id) {
         authorRepository.deleteById(id);
         return ResponseEntity.ok(true);

@@ -23,12 +23,12 @@ public class RecordController {
         this.authorRepository = authorRepository;
     }
 
-    @GetMapping("/getRecordsCount")
+    @GetMapping("/api/getRecordsCount")
     public long getRecordsCount() {
         return recordRepository.count();
     }
 
-    @PostMapping("/addRecord")
+    @PostMapping("/api/addRecord")
     public ResponseEntity<Record> addRecord(@RequestParam String description, @RequestParam long authorId) throws ResourceNotFoundException {
         Record record = new Record(description);
         Author author = authorRepository.findById(authorId).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + authorId));
@@ -37,7 +37,7 @@ public class RecordController {
         return ResponseEntity.ok(addedRecord);
     }
 
-    @PutMapping("/updateRecord/{id}")
+    @PutMapping("/api/updateRecord/{id}")
     public ResponseEntity<Record> updateRecord(@RequestBody Record record, @PathVariable long id, @RequestParam long authorId) throws ResourceNotFoundException {
         Record updatingRecord = recordRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Record not found for this id :: " + id));
         Author author = authorRepository.findById(authorId).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + authorId));
@@ -47,13 +47,13 @@ public class RecordController {
         return ResponseEntity.ok(updatedRecord);
     }
 
-    @GetMapping("/getRecordsByAuthorId")
+    @GetMapping("/api/getRecordsByAuthorId")
     public ResponseEntity<List<Record>> getRecordByAuthorId(@RequestParam long authorId) {
         List<Record> records = recordRepository.findByAuthorId(authorId);
         return ResponseEntity.ok(records);
     }
 
-    @GetMapping("/getRecordsByAuthorFirstName")
+    @GetMapping("/api/getRecordsByAuthorFirstName")
     public ResponseEntity<List<Record>> getByAuthorFirstName(@RequestParam String authorFirstName) {
         List<Record> records = recordRepository.getByAuthorFirstName(authorFirstName);
         return ResponseEntity.ok(records);
