@@ -1,11 +1,13 @@
 package com.krab.rest.controller;
 
+import com.krab.rest.configs.KafkaConfig;
 import com.krab.rest.dto.AuthorDto;
 import com.krab.rest.exceptions.ResourceNotFoundException;
 import com.krab.rest.services.AuthorsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,16 +18,20 @@ import java.util.List;
 public class AuthorController {
 
     private final AuthorsService authorsService;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
-    public AuthorController(AuthorsService authorsService) {
+    public AuthorController(AuthorsService authorsService, KafkaTemplate<String, String> kafkaTemplate) {
         this.authorsService = authorsService;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @PostMapping("/add")
     public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto author) {
-        log.info("Add author Value = " + author);
-        return ResponseEntity.ok(authorsService.addAuthor(author.getFirstName(), author.getLastName()));
+        log.info("Add author. Value = " + author);
+        AuthorDto addedAuthor = authorsService.addAuthor(author.getFirstName(), author.getLastName());
+        kafkaTemplate.send(KafkaConfig.MESSAGES_TOPIC, "Author added. Value = " + addedAuthor);
+        return ResponseEntity.ok(addedAuthor);
     }
 
     @PutMapping("/update/{id}")
