@@ -30,5 +30,4 @@ public class Record extends AbstractEntity {
     public Author getAuthor() {
         return author;
     }
-
 }

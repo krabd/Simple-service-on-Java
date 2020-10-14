@@ -31,18 +31,18 @@ public class AuthorsServiceImpl implements AuthorsService {
         return authorMapper.toDto(addedAuthor);
     }
 
-    @Override
-    public AuthorDto updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException {
-        Author updatingAuthor = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + id));
-        updatingAuthor.setFirstName(firstName);
-        updatingAuthor.setLastName(lastName);
-        final Author updatedAuthor = authorRepository.save(updatingAuthor);
-        return authorMapper.toDto(updatedAuthor);
-    }
+        @Override
+        public AuthorDto updateAuthor(long id, String firstName, String lastName) throws ResourceNotFoundException {
+            Author updatingAuthor = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found for this id :: " + id));
+            updatingAuthor.setFirstName(firstName);
+            updatingAuthor.setLastName(lastName);
+            final Author updatedAuthor = authorRepository.save(updatingAuthor);
+            return authorMapper.toDto(updatedAuthor);
+        }
 
-    @Override
-    public List<AuthorDto> getAuthors() {
-        return Lists.newArrayList(authorRepository.findAll())
+        @Override
+        public List<AuthorDto> getAuthors() {
+            return Lists.newArrayList(authorRepository.findAll())
                 .stream()
                 .map(authorMapper::toDto)
                 .collect(Collectors.toList());
