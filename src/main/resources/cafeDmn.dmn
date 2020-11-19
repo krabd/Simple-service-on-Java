@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_01inz7q" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="cafeDis" name="CafeDis">
+    <decisionTable id="DecisionTable_11rymgh">
+      <input id="Input_1" label="Season">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>season</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1nw1xxw" label="How many guests">
+        <inputExpression id="LiteralExpression_0cj8imu" typeRef="integer">
+          <text>guestsCount</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Cafe" name="cafe" typeRef="string" biodi:width="295" />
+      <rule id="DecisionRule_0ffun7y">
+        <inputEntry id="UnaryTests_0r8jdlx">
+          <text>"Winter"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wagb3q">
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0w30afa">
+          <text>"McDonalds"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08g81i0">
+        <inputEntry id="UnaryTests_0w1bhyg">
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qhq0js">
+          <text>&lt;= 4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rtn7kt">
+          <text>"KFC"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1249rix">
+        <inputEntry id="UnaryTests_1pj7fue">
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19i0nlk">
+          <text>&gt; 4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0biq78m">
+          <text>"BurgerKing"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="cafeDis">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
