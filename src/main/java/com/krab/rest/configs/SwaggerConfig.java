@@ -39,3 +39,5 @@ public class SwaggerConfig {
         return regex("/api.*");
     }
 }
+
+//http://localhost:8080/swagger-ui.html
