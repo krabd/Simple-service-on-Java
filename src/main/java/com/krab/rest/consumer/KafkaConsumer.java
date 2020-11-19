@@ -22,15 +22,15 @@ public class KafkaConsumer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = KafkaConfig.MESSAGES_TOPIC, groupId = "group_id")
-    public void consumeMessages(String message) {
-        System.out.println("message = " + message);
-    }
-
-    @KafkaListener(topics = KafkaConfig.ADD_AUTHOR_TOPIC, groupId = "group_author_id", containerFactory = "concurrentKafkaListenerContainerFactoryAuthor")
-    public void consumeAuthors(AuthorDto author) {
-        log.info("Add author from MQ. Value = " + author);
-        AuthorDto addedAuthor = authorsService.addAuthor(author.getFirstName(), author.getLastName());
-        kafkaTemplate.send(KafkaConfig.MESSAGES_TOPIC, "Author added from MQ. Value = " + addedAuthor);
-    }
+//    @KafkaListener(topics = KafkaConfig.MESSAGES_TOPIC, groupId = "group_id")
+//    public void consumeMessages(String message) {
+//        System.out.println("message = " + message);
+//    }
+//
+//    @KafkaListener(topics = KafkaConfig.ADD_AUTHOR_TOPIC, groupId = "group_author_id", containerFactory = "concurrentKafkaListenerContainerFactoryAuthor")
+//    public void consumeAuthors(AuthorDto author) {
+//        log.info("Add author from MQ. Value = " + author);
+//        AuthorDto addedAuthor = authorsService.addAuthor(author.getFirstName(), author.getLastName());
+//        kafkaTemplate.send(KafkaConfig.MESSAGES_TOPIC, "Author added from MQ. Value = " + addedAuthor);
+//    }
 }
