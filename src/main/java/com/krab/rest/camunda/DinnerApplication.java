@@ -19,9 +19,9 @@ public class DinnerApplication  extends ServletProcessApplication {
 
         VariableMap variables = Variables.createVariables()
                 .putValue("season", "Summer")
-                .putValue("guestCount", 10);
+                .putValue("guestsCount", 10);
 
-        DmnDecisionTableResult dishDecisionResult = decisionService.evaluateDecisionTableByKey("dish", variables);
+        DmnDecisionTableResult dishDecisionResult = decisionService.evaluateDecisionTableByKey("cafe", variables);
         String desiredDish = dishDecisionResult.getSingleEntry();
 
         System.out.println("Desired dish: " + desiredDish);
